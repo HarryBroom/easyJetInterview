@@ -28,7 +28,18 @@ namespace Interview
         [Test]
         public void FindAll()
         {
-            var result = Repo.All();
+            var listOfFlights = new List<T>();
+            listOfFlights.AddRange(new List<Flight>
+            {
+                new Flight { Id = 1, Type = "A321" },
+                new Flight { Id = 2, Type = "A321N" },
+                new Flight { Id = 3, Type = "A320B" },
+                new Flight { Id = 4, Type = "A320A" },
+                new Flight { Id = 5, Type = "A319" }
+            });
+            Repository repo = new Repository();
+            repo.SaveAll(listOfFlights);
+            var result = repo.All();
             var enumerable = result.ToList();
             Assert.AreEqual(5, enumerable.ToList().Count);
             var flight = enumerable.ElementAt(4) as Flight;
