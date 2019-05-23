@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 
 namespace Interview
@@ -24,6 +25,17 @@ namespace Interview
 
             Repo.SaveAll(listOfFlights);
         }
+        [Test]
+        public void FindAll()
+        {
+            var result = Repo.All();
+            var enumerable = result.ToList();
+            Assert.AreEqual(5, enumerable.ToList().Count);
+            var flight = enumerable.ElementAt(4) as Flight;
+            Assert.AreEqual(5, flight?.Id);
+            Assert.AreEqual("A319", flight?.Type);
+        }
+
 
         [Test]
         public void FindById()
